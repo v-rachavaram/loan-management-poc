@@ -25,6 +25,7 @@ namespace AuthService
 
             builder.Services.AddScoped<PasswordService>();
             builder.Services.AddScoped<IUserRepository,UserRepository>();
+            builder.Services.AddScoped<IAuthService, AuthenticationService>();
 
             var app = builder.Build();
 
