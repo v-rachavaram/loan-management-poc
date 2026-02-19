@@ -1,7 +1,9 @@
 
 using AuthService.Data;
+using AuthService.Models;
 using AuthService.Repositories;
 using AuthService.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -26,6 +28,7 @@ namespace AuthService
             );
 
             builder.Services.AddScoped<PasswordService>();
+            builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             builder.Services.AddScoped<IUserRepository,UserRepository>();
             builder.Services.AddScoped<IAuthService, AuthenticationService>();
             builder.Services.AddScoped<ITokenService, TokenService>();
