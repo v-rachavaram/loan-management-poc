@@ -3,6 +3,8 @@ using AuthService.Data;
 using AuthService.Repositories;
 using AuthService.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace AuthService
 {
@@ -26,6 +28,25 @@ namespace AuthService
             builder.Services.AddScoped<PasswordService>();
             builder.Services.AddScoped<IUserRepository,UserRepository>();
             builder.Services.AddScoped<IAuthService, AuthenticationService>();
+            builder.Services.AddScoped<ITokenService, TokenService>();
+
+            builder.Services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+
+                        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+                        ValidAudience = builder.Configuration["JwtSettings:Audience"],
+
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                            builder.Configuration["JwtSettings:Key"]!))
+                    };
+                });
 
             var app = builder.Build();
 
@@ -38,6 +59,7 @@ namespace AuthService
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
