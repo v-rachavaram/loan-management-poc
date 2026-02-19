@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "src\AuthService\AuthService.csproj", "{5C291AE0-4AB8-79EF-E3AE-1E6149BF3055}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanService", "src\LoanService\LoanService.csproj", "{00BF1137-01BE-43B6-82FA-23B8EF2451FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +19,17 @@ Global
 		{5C291AE0-4AB8-79EF-E3AE-1E6149BF3055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C291AE0-4AB8-79EF-E3AE-1E6149BF3055}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C291AE0-4AB8-79EF-E3AE-1E6149BF3055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00BF1137-01BE-43B6-82FA-23B8EF2451FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00BF1137-01BE-43B6-82FA-23B8EF2451FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00BF1137-01BE-43B6-82FA-23B8EF2451FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00BF1137-01BE-43B6-82FA-23B8EF2451FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5C291AE0-4AB8-79EF-E3AE-1E6149BF3055} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{00BF1137-01BE-43B6-82FA-23B8EF2451FA} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {441DD8B9-0AEC-4DCB-B393-154358320A15}
