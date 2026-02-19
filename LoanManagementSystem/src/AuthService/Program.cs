@@ -1,5 +1,7 @@
 
 using AuthService.Data;
+using AuthService.Repositories;
+using AuthService.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthService
@@ -20,6 +22,9 @@ namespace AuthService
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
             );
+
+            builder.Services.AddScoped<PasswordService>();
+            builder.Services.AddScoped<IUserRepository,UserRepository>();
 
             var app = builder.Build();
 
