@@ -8,11 +8,34 @@ namespace AuthService.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly PasswordService _passwordService;
+        private readonly ITokenService _tokenService;
 
-        public AuthenticationService(IUserRepository userRepository, PasswordService passwordService)
+        public AuthenticationService(IUserRepository userRepository
+            ,PasswordService passwordService
+            ,ITokenService tokenService)
         {
             _userRepository = userRepository;
             _passwordService = passwordService;
+            _tokenService = tokenService;
+        }
+
+        public async Task<string?> LoginAsync(LoginRequest loginRequest)
+        {
+            var user = await _userRepository.GetByEmailAsync(loginRequest.Email);
+
+            if (user == null) return null;
+
+            var isValid = _passwordService.VerifyPassword(user, loginRequest.Password);
+
+            if (!isValid)
+            {
+                return null;
+            }
+
+            var token = _tokenService.GenerateToken(user);
+
+            return token;
+
         }
 
         public async Task<string> RegisterUserAsync(RegisterRequest registerRequest)
