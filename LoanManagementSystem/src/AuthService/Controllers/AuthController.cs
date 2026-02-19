@@ -1,5 +1,6 @@
 ﻿using AuthService.DTOs;
 using AuthService.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,6 +37,13 @@ namespace AuthService.Controllers
                 return Unauthorized("Invalid credentials");
 
             return Ok(new { token });
+        }
+
+        [Authorize]
+        [HttpGet("profile")]
+        public IActionResult GetProfile()
+        {
+            return Ok("You are authenticated");
         }
     }
 }
