@@ -1,4 +1,6 @@
 
+using LoanService.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -62,6 +64,9 @@ namespace LoanService
                             builder.Configuration["JwtSettings:Key"]!))
                     };
                 });
+
+            builder.Services.AddDbContext<LoanDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
