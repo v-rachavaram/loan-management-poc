@@ -1,6 +1,7 @@
 
 using LoanService.Data;
 using LoanService.Repositories;
+using LoanService.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -70,6 +71,7 @@ namespace LoanService
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<ILoanRepository, LoanRepository>();
+            builder.Services.AddScoped<ILoanService,LoanManagementService>();
 
             var app = builder.Build();
 
