@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using LoanService.Extensions;
 
 namespace LoanService.Controllers
 {
@@ -21,7 +22,7 @@ namespace LoanService.Controllers
         [HttpPost("create-loan")]
         public async Task<IActionResult> CreateLoan(decimal amount)
         {
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+            var userId = User.GetUserId();
 
             await _loanService.CreateLoanAsync(userId, amount);
 
@@ -31,8 +32,10 @@ namespace LoanService.Controllers
         [HttpGet("get-loans")]
         public async Task<IActionResult> GetLoans()
         {
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+            var userId = User.GetUserId();
+
             var loans = await _loanService.GetLoansAsync(userId);
+
             return Ok(loans);
         }
        
