@@ -53,7 +53,8 @@ namespace AuthService
             });
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                 sqlOptions => sqlOptions.EnableRetryOnFailure())
             );
 
             builder.Services.AddScoped<PasswordService>();
@@ -83,11 +84,11 @@ namespace AuthService
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
+            //if (app.Environment.IsDevelopment())
+            //{
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
+            //}
 
             app.UseHttpsRedirection();
 
